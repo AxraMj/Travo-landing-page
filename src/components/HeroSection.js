@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import worldMap from '../assets/worldMap.jpg';
 import gsap from 'gsap';
+import Text3DWrapper from './Text3D';
 
 const pins = [
   { top: '18%', left: '28%', visibleBreakpoint: 'md' }, // North America
@@ -39,10 +40,10 @@ export default function HeroSection() {
       { scale: 1, opacity: 1, duration: 1.5 }
     );
 
-    // Title animation
+    // Title container animation
     tl.fromTo(titleRef.current,
-      { y: 50, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1 },
+      { opacity: 0, y: 50 },
+      { opacity: 1, y: 0, duration: 1 },
       "-=1"
     );
 
@@ -122,9 +123,9 @@ export default function HeroSection() {
       
       {/* Text Content */}
       <div className="relative z-30 flex flex-col items-center text-center px-4 sm:px-8 md:px-12 py-8 sm:py-12 w-full max-w-xs xs:max-w-sm sm:max-w-md md:max-w-3xl lg:max-w-5xl xl:max-w-6xl 2xl:max-w-7xl">
-        <h1 ref={titleRef} className="text-white font-extrabold uppercase text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl 2xl:text-9xl drop-shadow-2xl mb-4 xs:mb-5 sm:mb-8 lg:mb-10 tracking-tight leading-tight">
-          TRAVO
-        </h1>
+        <div ref={titleRef} className="w-full">
+          <Text3DWrapper />
+        </div>
         
         <blockquote 
           ref={quoteRef}
