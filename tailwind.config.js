@@ -8,7 +8,6 @@ module.exports = {
       fontFamily: {
         sans: ["'Poppins'", 'ui-sans-serif', 'system-ui', 'sans-serif'],
         serif: ["'Merriweather'", 'serif'],
-        playfair: ["'Playfair Display'", 'serif'],
       },
     },
   },

@@ -39,8 +39,8 @@ export default function HeroSection() {
         <h1 className="text-white font-extrabold uppercase text-3xl xs:text-4xl sm:text-5xl md:text-7xl lg:text-8xl drop-shadow-2xl mb-6 sm:mb-10 tracking-tight animate-fade-in delay-200 leading-tight break-words">
           WHERE TRAVEL<br />MEETS SOCIAL
         </h1>
-        <blockquote className="text-white italic font-playfair text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl max-w-2xl animate-fade-in delay-400 mt-6 md:mt-8 opacity-90 mx-auto leading-tight">
-          "Imagine discovering your next adventure through real travelers—not ads"
+        <blockquote className="text-white italic text-base xs:text-lg sm:text-2xl md:text-3xl lg:text-4xl max-w-xs xs:max-w-md sm:max-w-2xl animate-fade-in delay-400 mt-4 md:mt-6 opacity-90 border-l-4 border-blue-400 pl-4 sm:pl-6 mx-auto font-[\'Playfair Display\'],italic" style={{fontFamily: "'Playfair Display', Georgia, 'Times New Roman', Times, serif", fontStyle: 'italic'}}>
+          “Imagine discovering your next adventure through real travelers—not ads”
         </blockquote>
       </div>
       {/* Animations */}
