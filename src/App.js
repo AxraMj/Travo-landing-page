@@ -4,6 +4,7 @@ import FeatureHighlights from './components/FeatureHighlights';
 import TechStack from './components/TechStack';
 import AppDemo from './components/AppDemo';
 import DownloadAppSection from './components/DownloadAppSection';
+import CollaborationSection from './components/CollaborationSection';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
       </div>
       <AppDemo />
       <DownloadAppSection />
+      <CollaborationSection/>
     </>
   );
 }
