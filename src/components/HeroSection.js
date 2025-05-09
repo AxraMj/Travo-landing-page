@@ -50,7 +50,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-black bg-opacity-70 z-10" />
       
       {/* Bottom Gradient Overlay */}
-      <div className="absolute bottom-0 left-0 w-full h-1/4 sm:h-1/3 z-20 pointer-events-none bg-gradient-to-t from-gray-900 via-gray-900/80 to-transparent" />
+      <div className="absolute bottom-0 left-0 w-full h-1/4 sm:h-1/3 z-20 pointer-events-none bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
       
       {/* Glowing Pins with responsive sizing */}
       {visiblePins.map((pin, idx) => (
