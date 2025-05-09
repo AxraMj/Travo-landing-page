@@ -31,7 +31,7 @@ const features = [
 
 export default function FeatureHighlights() {
   return (
-    <section className="w-full bg-gradient-to-b from-gray-900 to-gray-800 py-16 px-4 flex flex-col items-center">
+    <section id="features" className="w-full bg-gradient-to-b from-gray-900 to-gray-800 py-16 px-4 flex flex-col items-center">
       <h2 className="text-white text-3xl sm:text-4xl md:text-5xl font-extrabold mb-10 text-center drop-shadow-lg">
         Feature Highlights
       </h2>

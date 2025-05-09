@@ -92,6 +92,9 @@ export default function HeroSection() {
         <button 
           className="mt-6 sm:mt-8 md:mt-12 lg:mt-16 bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 xs:py-3 px-4 xs:px-6 sm:px-8 md:px-10 lg:px-12 rounded-full text-sm xs:text-base sm:text-lg md:text-xl lg:text-3xl xl:text-4xl 2xl:text-5xl transition-all duration-300 transform hover:scale-105 opacity-0 animate-fadeIn shadow-lg shadow-orange-500/20"
           style={{ animationDelay: '1s' }}
+          onClick={() => {
+            document.getElementById('features').scrollIntoView({ behavior: 'smooth' });
+          }}
         >
           Start Exploring
         </button>
