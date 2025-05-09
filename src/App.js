@@ -29,8 +29,9 @@ function App() {
         </div>
       </div>
       <AppDemo />
-      <DownloadAppSection />
+      
       <CollaborationSection/>
+      <DownloadAppSection />
     </>
   );
 }
