@@ -1,5 +1,9 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { FaUser, FaRegFileAlt, FaBell, FaMapMarkedAlt, FaRobot } from 'react-icons/fa';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const features = [
   {
@@ -30,9 +34,55 @@ const features = [
 ];
 
 export default function FeatureHighlights() {
+  const sectionRef = useRef(null);
+  const titleRef = useRef(null);
+  const cardsRef = useRef([]);
+
+  useEffect(() => {
+    const cards = cardsRef.current;
+    
+    // Title animation
+    gsap.fromTo(titleRef.current,
+      { y: 50, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        scrollTrigger: {
+          trigger: titleRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse"
+        }
+      }
+    );
+
+    // Cards animation
+    cards.forEach((card, index) => {
+      gsap.fromTo(card,
+        { y: 50, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          delay: index * 0.2,
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+    });
+
+    // Cleanup
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, []);
+
   return (
-    <section id="features" className="w-full bg-gradient-to-b from-gray-900 to-gray-800 py-16 px-4 flex flex-col items-center">
-      <h2 className="text-white text-3xl sm:text-4xl md:text-5xl font-extrabold mb-10 text-center drop-shadow-lg">
+    <section ref={sectionRef} id="features" className="w-full bg-gradient-to-b from-gray-900 to-gray-800 py-16 px-4 flex flex-col items-center">
+      <h2 ref={titleRef} className="text-white text-3xl sm:text-4xl md:text-5xl font-extrabold mb-10 text-center drop-shadow-lg">
         Feature Highlights
       </h2>
       
@@ -40,6 +90,7 @@ export default function FeatureHighlights() {
         {features.map((feature, idx) => (
           <div
             key={idx}
+            ref={el => cardsRef.current[idx] = el}
             className="bg-gray-900 bg-opacity-80 rounded-3xl shadow-xl border border-gray-700 p-8 flex flex-col items-center text-center transition-all hover:scale-105 hover:shadow-blue-400/60 duration-300 mx-auto w-full"
           >
             <div className="mb-4 bg-gray-800 p-3 rounded-full">{feature.icon}</div>
