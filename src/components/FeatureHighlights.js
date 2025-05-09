@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { FaUser, FaRegFileAlt, FaBell, FaMapMarkedAlt, FaRobot } from 'react-icons/fa';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import GalaxyDotsBackground from './GalaxyDotsBackground';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -81,7 +82,8 @@ export default function FeatureHighlights() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="features" className="w-full bg-gradient-to-b from-gray-900 to-gray-800 py-16 px-4 flex flex-col items-center">
+    <section ref={sectionRef} id="features" className="relative w-full bg-gradient-to-b from-gray-900 to-gray-800 py-16 px-4 flex flex-col items-center overflow-hidden">
+      <GalaxyDotsBackground />
       <h2 ref={titleRef} className="text-white text-3xl sm:text-4xl md:text-5xl font-extrabold mb-10 text-center drop-shadow-lg">
         Feature Highlights
       </h2>

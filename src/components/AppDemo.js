@@ -3,6 +3,7 @@ import { IoChevronBack, IoChevronForward } from 'react-icons/io5';
 import welcomeScreen from '../assets/screenshots/welcome screen.png';
 import homeScreen from '../assets/screenshots/home screen.png';
 import locationScreen from '../assets/screenshots/location.png';
+import GalaxyDotsBackground from './GalaxyDotsBackground';
 
 const screenshots = [welcomeScreen, homeScreen, locationScreen];
 
@@ -22,7 +23,8 @@ export default function AppDemo() {
   };
 
   return (
-    <section className="w-full py-8 bg-gradient-to-b from-gray-900 to-gray-800">
+    <section className="relative w-full py-8 bg-gradient-to-b from-gray-900 to-gray-800 overflow-hidden">
+      <GalaxyDotsBackground />
       <div className="max-w-xl mx-auto px-4">
         {/* Heading */}
         <div className="text-center mb-8">

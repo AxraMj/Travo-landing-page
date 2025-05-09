@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import worldMap from '../assets/worldMap.jpg';
 import gsap from 'gsap';
 import Text3DWrapper from './Text3D';
+import GalaxyDotsBackground from './GalaxyDotsBackground';
 
 const pins = [
   { top: '18%', left: '28%', visibleBreakpoint: 'md' }, // North America
@@ -90,6 +91,7 @@ export default function HeroSection() {
 
   return (
     <section ref={sectionRef} className="relative w-full min-h-screen flex items-center justify-center overflow-hidden">
+      <GalaxyDotsBackground />
       {/* Map Background */}
       <div 
         ref={mapRef}
