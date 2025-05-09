@@ -1,26 +1,17 @@
-import React, { useRef, Suspense } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
+import React, { Suspense } from 'react';
+import { Canvas } from '@react-three/fiber';
 import { Text3D, Center, useMatcapTexture } from '@react-three/drei';
 
-function AnimatedText() {
-  const textRef = useRef();
+function StaticText() {
   const [matcapTexture] = useMatcapTexture('7B5254_E9DCC7_B19986_C8AC91', 256);
-
-  useFrame((state) => {
-    const time = state.clock.getElapsedTime();
-    if (textRef.current) {
-      textRef.current.rotation.y = Math.sin(time / 2) * 0.2;
-      textRef.current.rotation.x = Math.cos(time / 3) * 0.1;
-    }
-  });
 
   return (
     <Center>
-      <mesh ref={textRef}>
+      <mesh>
         <Text3D
           font="/fonts/helvetiker_bold.typeface.json"
-          size={1.5}
-          height={0.2}
+          size={1.2}
+          height={0.15}
           curveSegments={12}
           bevelEnabled
           bevelThickness={0.02}
@@ -38,7 +29,7 @@ function AnimatedText() {
 
 export default function Text3DWrapper() {
   return (
-    <div className="w-full h-[200px] md:h-[300px]">
+    <div className="w-full h-[150px] xs:h-[180px] sm:h-[200px] md:h-[250px] lg:h-[300px]">
       <Canvas
         camera={{ position: [0, 0, 5], fov: 50 }}
         style={{
@@ -46,10 +37,10 @@ export default function Text3DWrapper() {
         }}
       >
         <Suspense fallback={null}>
-          <ambientLight intensity={1} />
-          <pointLight position={[10, 10, 10]} intensity={1} />
-          <pointLight position={[-10, -10, -10]} intensity={0.5} />
-          <AnimatedText />
+          <ambientLight intensity={1.2} />
+          <pointLight position={[10, 10, 10]} intensity={1.2} />
+          <pointLight position={[-10, -10, -10]} intensity={0.6} />
+          <StaticText />
         </Suspense>
       </Canvas>
     </div>
