@@ -3,6 +3,7 @@ import HeroSection from './components/HeroSection';
 import FeatureHighlights from './components/FeatureHighlights';
 import TechStack from './components/TechStack';
 import AppDemo from './components/AppDemo';
+import DownloadAppSection from './components/DownloadAppSection';
 
 function App() {
   return (
@@ -23,9 +24,11 @@ function App() {
               — Axra
             </footer>
           </blockquote>
+
         </div>
       </div>
       <AppDemo />
+      <DownloadAppSection />
     </>
   );
 }
