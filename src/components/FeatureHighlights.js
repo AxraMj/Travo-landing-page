@@ -38,17 +38,26 @@ export default function FeatureHighlights() {
   const sectionRef = useRef(null);
   const titleRef = useRef(null);
   const cardsRef = useRef([]);
+  const iconsRef = useRef([]);
+  const eventListenersRef = useRef([]);
 
   useEffect(() => {
     const cards = cardsRef.current;
+    const icons = iconsRef.current;
     
-    // Title animation
+    // Title animation with a nice reveal effect
     gsap.fromTo(titleRef.current,
-      { y: 50, opacity: 0 },
+      { 
+        y: 50, 
+        opacity: 0,
+        scale: 0.9
+      },
       {
         y: 0,
         opacity: 1,
-        duration: 1,
+        scale: 1,
+        duration: 1.2,
+        ease: "power3.out",
         scrollTrigger: {
           trigger: titleRef.current,
           start: "top 80%",
@@ -57,15 +66,25 @@ export default function FeatureHighlights() {
       }
     );
 
-    // Cards animation
+    // Cards animation with a staggered effect
     cards.forEach((card, index) => {
+      if (!card) return;
+
+      // Initial card animation
       gsap.fromTo(card,
-        { y: 50, opacity: 0 },
+        { 
+          y: 100, 
+          opacity: 0,
+          rotationX: 15,
+          transformOrigin: "center center"
+        },
         {
           y: 0,
           opacity: 1,
-          duration: 0.8,
-          delay: index * 0.2,
+          rotationX: 0,
+          duration: 1,
+          delay: index * 0.15,
+          ease: "power3.out",
           scrollTrigger: {
             trigger: card,
             start: "top 85%",
@@ -73,11 +92,91 @@ export default function FeatureHighlights() {
           }
         }
       );
+
+      // Icon animation
+      if (icons[index]) {
+        gsap.fromTo(icons[index],
+          {
+            scale: 0,
+            rotation: -180,
+            opacity: 0
+          },
+          {
+            scale: 1,
+            rotation: 0,
+            opacity: 1,
+            duration: 0.8,
+            delay: index * 0.15 + 0.3,
+            ease: "back.out(1.7)",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 85%",
+              toggleActions: "play none none reverse"
+            }
+          }
+        );
+      }
+
+      // Hover animation handlers
+      const handleMouseEnter = () => {
+        gsap.to(card, {
+          scale: 1.05,
+          duration: 0.3,
+          ease: "power2.out",
+          boxShadow: "0 0 30px rgba(59, 130, 246, 0.3)"
+        });
+        if (icons[index]) {
+          gsap.to(icons[index], {
+            scale: 1.2,
+            duration: 0.3,
+            ease: "power2.out"
+          });
+        }
+      };
+
+      const handleMouseLeave = () => {
+        gsap.to(card, {
+          scale: 1,
+          duration: 0.3,
+          ease: "power2.out",
+          boxShadow: "0 0 0px rgba(59, 130, 246, 0)"
+        });
+        if (icons[index]) {
+          gsap.to(icons[index], {
+            scale: 1,
+            duration: 0.3,
+            ease: "power2.out"
+          });
+        }
+      };
+
+      // Add event listeners
+      card.addEventListener('mouseenter', handleMouseEnter);
+      card.addEventListener('mouseleave', handleMouseLeave);
+
+      // Store event listeners for cleanup
+      eventListenersRef.current.push({
+        element: card,
+        handlers: {
+          mouseenter: handleMouseEnter,
+          mouseleave: handleMouseLeave
+        }
+      });
     });
 
-    // Cleanup
+    // Cleanup function
     return () => {
+      // Cleanup ScrollTrigger
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+
+      // Cleanup event listeners
+      eventListenersRef.current.forEach(({ element, handlers }) => {
+        if (element) {
+          element.removeEventListener('mouseenter', handlers.mouseenter);
+          element.removeEventListener('mouseleave', handlers.mouseleave);
+        }
+      });
+      eventListenersRef.current = [];
     };
   }, []);
 
@@ -93,9 +192,14 @@ export default function FeatureHighlights() {
           <div
             key={idx}
             ref={el => cardsRef.current[idx] = el}
-            className="bg-gray-900 bg-opacity-80 rounded-3xl shadow-xl border border-gray-700 p-8 flex flex-col items-center text-center transition-all hover:scale-105 hover:shadow-blue-400/60 duration-300 mx-auto w-full"
+            className="bg-gray-900 bg-opacity-80 rounded-3xl shadow-xl border border-gray-700 p-8 flex flex-col items-center text-center transition-all duration-300 mx-auto w-full"
           >
-            <div className="mb-4 bg-gray-800 p-3 rounded-full">{feature.icon}</div>
+            <div 
+              ref={el => iconsRef.current[idx] = el}
+              className="mb-4 bg-gray-800 p-3 rounded-full"
+            >
+              {feature.icon}
+            </div>
             <h3 className="text-white font-bold text-xl mb-2">{feature.title}</h3>
             <p className="text-gray-200 text-sm sm:text-base">{feature.description}</p>
           </div>
